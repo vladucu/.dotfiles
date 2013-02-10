@@ -5,7 +5,7 @@ git submodule update --init --recursive
 
 
 function doIt() {
-	rsync --exclude ".git/" --exclude ".DS_Store" --exclude "sync.sh" --exclude "install-deps.sh" --exclude "README.md" --exclude "*.sublime-*" --exclude ".gitmodules" -av . ~
+	rsync --exclude ".git/" --exclude ".DS_Store" --exclude "sync.sh" --exclude "install-deps.sh" --exclude "README.md" --exclude "*.sublime-*" --exclude ".gitmodules" --exclude "z" --exclude "oh-my-zsh" -av . ~
 }
 if [ "$1" == "--force" -o "$1" == "-f" ]; then
 	doIt
