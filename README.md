@@ -3,4 +3,4 @@
 
 Personal dotfiles git project, used on Ubuntu 12.10.
 
-Most of it copied from Paul Irish's [dotfiles project](https://github.com/mathiasbynens/dotfiles/) which is great, so make sure you check that first.
+Contains a forked version of "Robby Russell's oh-my-zsh":https://github.com/robbyrussell/oh-my-zsh project. Make sure you check that out.
