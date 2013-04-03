@@ -34,7 +34,7 @@ DISABLE_AUTO_UPDATE="true"
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(git sublime debian extract vagrant ssh-agent)
+plugins=(git git-flow sublime debian extract vagrant ssh-agent ruby gem rvm git-cust composer)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -46,3 +46,6 @@ source $ZSH/oh-my-zsh.sh
 # ssh-agent
 zstyle :omz:plugins:ssh-agent agent-forwarding on
 zstyle :omz:plugins:ssh-agent id_rsa vladucu
+
+# Enable rvm
+source $HOME/.rvm/scripts/rvm

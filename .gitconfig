@@ -1,3 +1,7 @@
+[user]
+	name = Vlad Vanca
+	email = vlad@sweettoothhq.com
+
 [color]
 	ui = always
 
@@ -11,6 +15,8 @@
 	attributesfile = ~/.gitattributes
 	whitespace = fix,space-before-tab,tab-in-indent,trailing-space
 	autocrlf = input
+	# Use sublime2 as default eidtor
+	editor = sub -w
 
 [color]
 	# Use colors in Git commands that are capable of colored output when outputting to the terminal
@@ -34,4 +40,4 @@
 
 [merge]
 	# Include summaries of merged commits in newly created merge commit messages
-	log = true
+	#log = true
