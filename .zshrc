@@ -17,7 +17,7 @@ ZSH_THEME="vladucu"
 # CASE_SENSITIVE="true"
 
 # Comment this out to disable bi-weekly auto-update checks
-DISABLE_AUTO_UPDATE="true"
+DISABLE_AUTO_UPDATE="false"
 
 # Uncomment to change how many often would you like to wait before auto-updates occur? (in days)
 # export UPDATE_ZSH_DAYS=13
@@ -37,7 +37,7 @@ DISABLE_AUTO_UPDATE="true"
 plugins=(git git-flow sublime debian extract vagrant knife ssh-agent ruby gem rvm git-cust composer npm node)
 
 # set default editor to sublime
-export EDITOR="sub"
+export EDITOR="subl"
 
 source $ZSH/oh-my-zsh.sh
 
@@ -46,9 +46,9 @@ source $ZSH/oh-my-zsh.sh
 # # init z   https://github.com/rupa/z
 . $DOT/z/z.sh
 
-# ssh-agent
+# ssh-agent set forwarding on and specify all identities that we want to be loaded
 zstyle :omz:plugins:ssh-agent agent-forwarding on
-zstyle :omz:plugins:ssh-agent id_rsa vladucu
+zstyle :omz:plugins:ssh-agent vladucu vlad@ST inga
 
 # Enable rvm
 source $HOME/.rvm/scripts/rvm

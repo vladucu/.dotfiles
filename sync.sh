@@ -17,3 +17,5 @@ else
 	fi
 fi
 unset doIt
+
+chsh -s /bin/zsh

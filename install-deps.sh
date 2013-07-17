@@ -18,6 +18,9 @@ bash < <(curl -s https://raw.github.com/colinmollenhour/modman/master/modman-ins
 # rvm for the rubiess
 curl -L https://get.rvm.io | bash -s stable --ruby
 
+# install Chef Client
+curl -L https://www.opscode.com/chef/install.sh | sudo bash
+
 # https://github.com/rupa/z
 # z, oh how i love you
 mkdir -p $PWD/z
