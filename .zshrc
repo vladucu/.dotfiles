@@ -43,7 +43,7 @@ plugins=(
     vagrant knife docker
     sublime debian extract ssh-agent  composer
     npm node
-    ruby gem rvm rails rails4
+    ruby gem rvm rails
     shortcuts
     go
 )
