@@ -39,11 +39,13 @@ zstyle :omz:plugins:ssh-agent vladucu vlad@ST inga
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 plugins=(
-    git git-flow git-cust
-    vagrant knife
+    git git-flow git-extras git-cust
+    vagrant knife docker
     sublime debian extract ssh-agent  composer
     npm node
-    ruby bundler gem rvm rails rails4
+    ruby gem rvm rails rails4
+    shortcuts
+    go
 )
 
 # set default editor to sublime
@@ -56,7 +58,9 @@ source $ZSH/oh-my-zsh.sh
 # # init z   https://github.com/rupa/z
 . $DOT/z/z.sh
 
-# Enable rvm
-source $HOME/.rvm/scripts/rvm
 # Enable nvm
 source $HOME/.nvm/nvm.sh
+
+# Enable rvm
+source $HOME/.rvm/scripts/rvm
+rvm use default
