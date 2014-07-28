@@ -39,7 +39,7 @@ zstyle :omz:plugins:ssh-agent vladucu vlad@ST inga
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 plugins=(
-    git git-flow git-extras git-cust
+    git git-flow git-extras git-cust github
     vagrant knife docker supervisor
     sublime debian extract ssh-agent  composer
     npm node
