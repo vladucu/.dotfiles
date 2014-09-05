@@ -64,3 +64,5 @@ source $HOME/.nvm/nvm.sh
 # Enable rvm
 source $HOME/.rvm/scripts/rvm
 rvm use default
+
+eval "$(direnv hook zsh)"
