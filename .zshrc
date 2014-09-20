@@ -17,7 +17,7 @@ ZSH_THEME="vladucu"
 # CASE_SENSITIVE="true"
 
 # Comment this out to disable bi-weekly auto-update checks
-DISABLE_AUTO_UPDATE="false"
+DISABLE_AUTO_UPDATE="true"
 
 # Uncomment to change how many often would you like to wait before auto-updates occur? (in days)
 # export UPDATE_ZSH_DAYS=13
@@ -41,9 +41,14 @@ zstyle :omz:plugins:ssh-agent vladucu vlad@ST inga
 plugins=(
     git git-flow git-extras git-cust github
     vagrant knife docker supervisor
-    sublime debian extract ssh-agent  composer
+    sublime debian extract ssh-agent composer
     npm node
-    ruby gem rvm rails
+    ruby gem rvm rails capistrano
+    redis-cli
+    z
+    heroku
+    battery
+    cp
     shortcuts
     go
 )
@@ -65,4 +70,5 @@ source $HOME/.nvm/nvm.sh
 source $HOME/.rvm/scripts/rvm
 rvm use default
 
+# Enable direnv
 eval "$(direnv hook zsh)"
