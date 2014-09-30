@@ -1,0 +1,30 @@
+#!/bin/sh
+lock() {
+    i3lock -t -i ~/.i3/image.png -p win
+}
+
+case "$1" in
+    lock)
+        lock
+        ;;
+    logout)
+        i3-msg exit
+        ;;
+    suspend)
+        lock && sudo pm-suspend-hybrid
+        ;;
+    hibernate)
+        lock && sudo pm-hibernate
+        ;;
+    reboot)
+        sudo reboot
+        ;;
+    shutdown)
+        sudo shutdown
+        ;;
+    *)
+        echo "Usage $0 {lock|logout|suspend|hibernate|reboot|shutdown}"
+        exit 2
+esac
+
+exit 0

@@ -167,26 +167,26 @@ bindsym $mod+Shift+minus move scratchpad
 bindsym $mod+Shift+plus scratchpad show
 
 ### startup apps ###
-exec dropbox start -i
+exec --no-startup-id dropbox start -i
 # So that volume buttons and battery warnings work: https://faq.i3wm.org/question/279/how-do-you-use-i3-comfortably/#342
-exec gnome-settings-daemon
+exec --no-startup-id gnome-settings-daemon
 # Synapse
-exec synapse --startup
+exec --no-startup-id synapse --startup
 # Growl
-exec sleep 30; /usr/bin/gol
+exec --no-startup-id sleep 30; /usr/bin/gol
 # Network Manager
 exec --no-startup-id nm-applet
 # Always auto-start following
-exec google-chrome-beta
-exec terminator
+exec --no-startup-id google-chrome-beta
+exec --no-startup-id terminator
 
 ### workspaces ###
 # name the workspaces
 set $tag1 "1: home"
 set $tag2 "2: home"
-set $tag3 "3"
-set $tag4 "4"
-set $tag5 "5"
+set $tag3 "3: work"
+set $tag4 "4: prog"
+set $tag5 "5: misc"
 set $tag6 "6"
 set $tag7 "7"
 set $tag8 "8"
@@ -206,9 +206,14 @@ workspace $tag8 output HDMI1
 assign [class="^Google-chrome-beta$"] $tag2
 assign [class="^Google-chrome-beta$" title="^Hangouts$"] $tag1
 assign [class="^x-terminal-emulator$"] $tag1
+assign [class="^Sublime_text$"] $tag4
+assign [class="^jetbrains-phpstorm$"] $tag4
+assign [class="^Skype$"] $tag1
+
 
 # custom window settings
 for_window [class="^Google-chrome-beta$" title="^Hangouts$"] floating enable
+for_window [class="^Skype$"] floating enable
 
 
 # Colors
@@ -218,7 +223,8 @@ client.urgent #aa0000 #990000 #ffffff
 
 
 ### applications shortcuts
-mode "$apps" {
+set $mode_apps Chrome (c), Terminal (t)
+mode "$mode_apps" {
     bindsym c exec google-chrome-beta
     bindsym t exec terminator
 
@@ -226,7 +232,24 @@ mode "$apps" {
     bindsym Return mode "default"
     bindsym Escape mode "default"
 }
-bindsym $mod+Shift+a mode "$apps"
+bindsym $mod+Shift+a mode "$mode_apps"
+
+###
+set $mode_system System (l) lock, (e) logout, (s) suspend, (h) hibernate, (r) reboot, (Shift+s) shutdown
+mode "$mode_system" {
+    bindsym l exec --no-startup-id ~/.i3/i3exit lock, mode "default"
+    bindsym e exec --no-startup-id ~/.i3/i3exit logout, mode "default"
+    bindsym s exec --no-startup-id ~/.i3/i3exit suspend, mode "default"
+    bindsym h exec --no-startup-id ~/.i3/i3exit hibernate, mode "default"
+    bindsym r exec --no-startup-id ~/.i3/i3exit reboot, mode "default"
+    bindsym Shift+s exec --no-startup-id ~./i3/i3exit shutdown, mode "default"
+
+    # back to normal: Enter or Escape
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+
+bindsym $mod+F1 mode "$mode_system"
 
 
 # popup during fullscreen
