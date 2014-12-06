@@ -72,3 +72,7 @@ rvm use default
 
 # Enable direnv
 eval "$(direnv hook zsh)"
+
+if [ "$0" = "/bin/zsh" -a "$DESKTOP_SESSION" = "i3" ]; then
+    export $(gnome-keyring-daemon -s)
+fi
