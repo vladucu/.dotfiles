@@ -1,6 +1,6 @@
 #!/bin/sh
 lock() {
-    i3lock -t -i ~/.i3/image.png -p win
+    i3lock -t -i ~/.i3/image.png #-p win
 }
 
 case "$1" in
@@ -11,18 +11,16 @@ case "$1" in
         i3-msg exit
         ;;
     suspend)
-        lock
-        sudo pm-suspend-hybrid &
+        pm-suspend-hybrid
         ;;
     hibernate)
-        lock
-        sudo pm-hibernate &
+        pm-hibernate
         ;;
     reboot)
-        sudo reboot
+        reboot
         ;;
     shutdown)
-        sudo shutdown
+        shutdown
         ;;
     *)
         echo "Usage $0 {lock|logout|suspend|hibernate|reboot|shutdown}"

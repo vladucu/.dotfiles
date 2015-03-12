@@ -28,7 +28,7 @@ floating_modifier $mod
 bindsym $mod+Return exec i3-sensible-terminal
 
 # kill focused window
-bindsym $mod+Shift+q kill
+bindsym $mod+q kill
 bindsym $ALT+F4 kill
 
 # start dmenu (a program launcher)
@@ -79,6 +79,9 @@ bindsym $mod+e layout toggle split
 # toggle tiling / floating
 bindsym $mod+Shift+space floating toggle
 
+# Toggle between stacking/tabbed/splith/splitv:
+bindsym $mod+x layout toggle all
+
 # change focus between tiling / floating windows
 bindsym $mod+space focus mode_toggle
 
@@ -101,16 +104,28 @@ bindsym $mod+9 workspace $tag9
 bindsym $mod+0 workspace $tag10
 
 # move focused container to workspace
-bindsym $mod+Shift+1 move container to workspace $tag1
-bindsym $mod+Shift+2 move container to workspace $tag2
-bindsym $mod+Shift+3 move container to workspace $tag3
-bindsym $mod+Shift+4 move container to workspace $tag4
-bindsym $mod+Shift+5 move container to workspace $tag5
-bindsym $mod+Shift+6 move container to workspace $tag6
-bindsym $mod+Shift+7 move container to workspace $tag7
-bindsym $mod+Shift+8 move container to workspace $tag8
-bindsym $mod+Shift+9 move container to workspace $tag9
-bindsym $mod+Shift+0 move container to workspace $tag10
+bindsym $mod+Shift+1 move container to workspace $tag1; workspace $tag1
+bindsym $mod+Shift+2 move container to workspace $tag2; workspace $tag2
+bindsym $mod+Shift+3 move container to workspace $tag3; workspace $tag3
+bindsym $mod+Shift+4 move container to workspace $tag4; workspace $tag4
+bindsym $mod+Shift+5 move container to workspace $tag5; workspace $tag5
+bindsym $mod+Shift+6 move container to workspace $tag6; workspace $tag6
+bindsym $mod+Shift+7 move container to workspace $tag7; workspace $tag7
+bindsym $mod+Shift+8 move container to workspace $tag8; workspace $tag8
+bindsym $mod+Shift+9 move container to workspace $tag9; workspace $tag9
+bindsym $mod+Shift+0 move container to workspace $tag10; workspace $tag10
+
+# switch to the next and previous workspace
+bindsym $ALT+Shift+Tab workspace prev
+bindsym $ALT+Tab workspace next
+
+# switch to the next and previous workspace in current output
+bindsym $mod+Control+comma workspace prev_on_output
+bindsym $mod+Control+period workspace next_on_output
+
+# switch between the current and the previously focused one
+bindsym $mod+Tab workspace back_and_forth
+bindsym $mod+Shift+Tab move container to workspace back_and_forth
 
 # reload the configuration file
 bindsym $mod+Shift+c reload
@@ -168,9 +183,11 @@ bar {
 ###### Custom Stuff ######
 
 bindsym $mod+Shift+minus move scratchpad
-bindsym $mod+Shift+plus scratchpad show
+bindsym $mod+minus scratchpad show
+
 
 ### startup apps ###
+
 exec --no-startup-id dropbox start -i
 
 # So that volume buttons and battery warnings work: https://faq.i3wm.org/question/279/how-do-you-use-i3-comfortably/#342
@@ -179,19 +196,27 @@ exec --no-startup-id gnome-settings-daemon
 # Synapse
 exec --no-startup-id synapse --startup
 
-# Growl
-exec --no-startup-id sleep 30; /usr/bin/gol
-
 # Network Manager
 exec --no-startup-id nm-applet
 
+# Growl
+exec --no-startup-id sleep 30; /usr/bin/gol
+
+# Redshift
+exec --no-startup-id sleep 5; redshift-gtk
+
+# Rescuetime
+exec --no-startup-id rescuetime
+
 # Always auto-start following
-exec --no-startup-id google-chrome-beta
+exec  google-chrome-beta
 #exec --no-startup-id terminator
 
 ### workspaces ###
+workspace_auto_back_and_forth yes
+
 # name the workspaces
-set $tag1 "1: home"
+set $tag1 "1: term"
 set $tag2 "2: home"
 set $tag3 "3: work"
 set $tag4 "4: prog"
@@ -223,6 +248,10 @@ assign [class="^Skype$"] $tag1
 # custom window settings
 for_window [class="^Google-chrome-beta$" title="^Hangouts$"] floating enable
 for_window [class="^Skype$"] floating enable
+for_window [title="Calculator"] floating enable
+for_window [title="Calculator"] border 1pixel
+for_window [window_role="pop-up"] floating enable
+for_window [class="notify"] floating enable border 1pixel
 
 
 # Colors
@@ -246,12 +275,12 @@ bindsym $mod+Shift+a mode "$mode_apps"
 ###
 set $mode_system System (l) lock, (e) logout, (s) suspend, (h) hibernate, (r) reboot, (Shift+s) shutdown
 mode "$mode_system" {
-    bindsym l exec --no-startup-id ~/.i3/i3exit lock, mode "default"
-    bindsym e exec --no-startup-id ~/.i3/i3exit logout, mode "default"
-    bindsym s exec --no-startup-id ~/.i3/i3exit suspend, mode "default"
-    bindsym h exec --no-startup-id ~/.i3/i3exit hibernate, mode "default"
-    bindsym r exec --no-startup-id ~/.i3/i3exit reboot, mode "default"
-    bindsym Shift+s exec --no-startup-id ~./i3/i3exit shutdown, mode "default"
+    bindsym l exec --no-startup-id /home/vladucu/.i3/i3exit lock, mode "default"
+    bindsym e exec --no-startup-id /home/vladucu/.i3/i3exit logout, mode "default"
+    bindsym s exec sudo /home/vladucu/.i3/i3exit suspend, mode "default"
+    bindsym h exec sudo /home/vladucu/.i3/i3exit hibernate, mode "default"
+    bindsym r exec sudo /home/vladucu/.i3/reboot, mode "default"
+    bindsym Shift+s exec sudo /home/vladucu/.i3/i3exit shutdown, mode "default"
 
     # back to normal: Enter or Escape
     bindsym Return mode "default"
@@ -260,6 +289,48 @@ mode "$mode_system" {
 
 bindsym $mod+F1 mode "$mode_system"
 
+set $mode_move Move workspace to output: ↑, →, ↓, ←
+mode "$mode_move" {
+        bindsym Left    move workspace to output left, mode "default"
+        bindsym Right   move workspace to output right, mode "default"
+        bindsym Up      move workspace to output up, mode "default"
+        bindsym Down    move workspace to output down, mode "default"
+
+        # back to normal: Enter or Escape
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+}
+bindsym $mod+m mode "$mode_move"
+
+set $mode_external_pos External screen position: ↑, →, ↓, ←
+mode "$mode_external_pos" {
+        bindsym Left    exec xrandr --output $OUTPUT_E --auto --left-of $OUTPUT_I, mode "default"
+        bindsym Right   exec xrandr --output $OUTPUT_E --auto --right-of $OUTPUT_I, mode "default"
+        bindsym Up      exec xrandr --output $OUTPUT_E --auto --above $OUTPUT_I, mode "default"
+        bindsym Down    exec xrandr --output $OUTPUT_E --auto --below $OUTPUT_I, mode "default"
+
+        # back to normal: Enter or Escape
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+}
+bindsym $mod+Shift+m mode "$mode_external_pos"
+
+set $mode_screen Multi-monitor setup: (e)xternal only, (i)nternal only, (c)lone, (s)eparated
+mode "$mode_screen" {
+    bindsym c exec --no-startup-id xrandr --output $OUTPUT_E --auto --output $OUTPUT_I --auto, mode "default"
+    bindsym e exec --no-startup-id xrandr --output $OUTPUT_E --auto --output $OUTPUT_I --off, mode "default"
+    bindsym i exec --no-startup-id xrandr --output $OUTPUT_I --auto --output $OUTPUT_E --off, mode "default"
+    bindsym s exec --no-startup-id xrandr --output $OUTPUT_I --auto && xrandr --output $OUTPUT_E --right-of $OUTPUT_I, mode "default"
+
+    # back to normal: Enter or Escape
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+bindsym $mod+Mod1+m mode "$mode_screen"
 
 # popup during fullscreen
 popup_during_fullscreen smart
+
+
+# TODO: check more about multiple-monitors here
+# https://github.com/giacomos/i3wm-config/blob/master/config_work_laptop

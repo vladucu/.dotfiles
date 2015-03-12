@@ -28,4 +28,5 @@ curl https://raw.github.com/rupa/z/master/z.sh > $PWD/z/z.sh
 chmod +x $PWD/z/z.sh
 # also consider moving over your current .z file if possible. it's painful to rebuild :)
 
-# DO: install sublime2 and create symlink as sub
+# http://vim.spf13.com/#install
+curl http://j.mp/spf13-vim3 -L -o - | sh

@@ -51,6 +51,7 @@ plugins=(
     cp
     shortcuts
     go
+    tmux tmuxinator
 )
 
 # set default editor to sublime
