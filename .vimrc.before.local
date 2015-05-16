@@ -1,0 +1,2 @@
+set nocompatible
+let g:spf13_bundle_groups=['general', 'programming', 'php', 'javascript', 'html', 'ruby', 'go', 'misc', 'youcomplete']
