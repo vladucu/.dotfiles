@@ -1,2 +1,11 @@
-set nocompatible
-let g:spf13_bundle_groups=['general', 'programming', 'php', 'javascript', 'html', 'ruby', 'go', 'misc', 'youcomplete']
+let g:spf13_bundle_groups=['general', 'programming', 'php', 'javascript', 'html', 'ruby', 'go', 'misc', 'neocomplete']
+
+let g:airline_theme="simple"
+let g:airline_powerline_fonts = 1
+let g:airline#extensions#tabline#enabled = 1
+
+syntax enable
+
+" give us nice EOL (end of line) characters
+set list
+set listchars=tab:▸\ ,eol:¬
