@@ -7,4 +7,17 @@ let g:solarized_termtrans = 0
 set background=dark
 colorscheme solarized
 
+set timeoutlen=0 " Time to wait after ESC (default causes an annoying delay)"
 
+" Forcing the use of hjkl keys to navigate
+noremap <Up> <nop>
+noremap <Down> <nop>
+noremap <Left> <nop>
+noremap <Right> <nop>
+inoremap <Up> <nop>
+inoremap <Down> <nop>
+inoremap <Left> <nop>
+inoremap <Right> <nop>
+
+" Remove trailing whitespaces and \^M chars, overwriting only to add other exxtensions too
+autocmd FileType c,cpp,java,go,php,javascript,puppet,python,rust,twig,xml,yml,perl,sql autocmd BufWritePre <buffer> if !exists('g:spf13_keep_trailing_whitespace') | call StripTrailingWhitespace() | endif"

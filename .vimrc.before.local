@@ -1,11 +1,51 @@
-let g:spf13_bundle_groups=['general', 'programming', 'php', 'javascript', 'html', 'ruby', 'go', 'misc', 'neocomplete']
+let g:spf13_bundle_groups=['general', 'programming', 'neocomplete', 'php', 'javascript', 'html', 'ruby', 'go', 'misc', 'writing']
 
-let g:airline_theme="simple"
-let g:airline_powerline_fonts = 1
-let g:airline#extensions#tabline#enabled = 1
+" Airline config {
+    let g:airline_theme="simple"
+    let g:airline_powerline_fonts = 1
+    let g:airline#extensions#tabline#enabled = 1
+" }
+
+" vim-go config {
+    if count(g:spf13_bundle_groups, 'go')
+        let g:go_fmt_command = "goimports"
+
+        au FileType go nmap <leader>r <Plug>(go-run)
+        au FileType go nmap <leader>b <Plug>(go-build)
+        au FileType go nmap <leader>t <Plug>(go-test)
+        au FileType go nmap <leader>c <Plug>(go-coverage)
+        au FileType go nmap <Leader>ds <Plug>(go-def-split)
+        au FileType go nmap <Leader>dv <Plug>(go-def-vertical)
+        au FileType go nmap <Leader>dt <Plug>(go-def-tab)
+        au FileType go nmap <Leader>gd <Plug>(go-doc)
+        au FileType go nmap <Leader>gv <Plug>(go-doc-vertical)
+        au FileType go nmap <Leader>gb <Plug>(go-doc-browser)
+        au FileType go nmap <Leader>s <Plug>(go-implements)
+        au FileType go nmap <Leader>i <Plug>(go-info)
+        au FileType go nmap <Leader>e <Plug>(go-rename)
+
+        let g:go_highlight_functions = 1
+        let g:go_highlight_methods = 1
+        let g:go_highlight_structs = 1
+    endif
+"}
+
+" Rails specific configs {
+    if count(g:spf13_bundle_groups, 'ruby')
+        " vim-rspec
+        au FileType ruby map <Leader>t :call RunCurrentSpecFile()<CR>
+        au FileType ruby map <Leader>s :call RunNearestSpec()<CR>
+        au FileType ruby map <Leader>l :call RunLastSpec()<CR>
+        au FileType ruby map <Leader>a :call RunAllSpecs()<CR>
+
+        let g:rspec_command = "foreman run rspec {spec}"
+    endif
+" }
 
 syntax enable
 
 " give us nice EOL (end of line) characters
 set list
 set listchars=tab:▸\ ,eol:¬
+
+let g:spf13_no_omni_complete = 1
