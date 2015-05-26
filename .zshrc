@@ -57,6 +57,9 @@ plugins=(
 # set default editor to sublime
 export EDITOR="subl"
 
+powerline-daemon -q
+. $HOME/.local/lib/python2.7/site-packages/powerline/bindings/zsh/powerline.zsh
+
 source $ZSH/oh-my-zsh.sh
 
 # Customize to your needs..
@@ -76,4 +79,9 @@ eval "$(direnv hook zsh)"
 
 if [ "$0" = "/bin/zsh" -a "$DESKTOP_SESSION" = "i3" ]; then
     export $(gnome-keyring-daemon -s)
+fi
+
+if [ "$COLORTERM" = "gnome-terminal" ] || [ "$COLORTERM" = "xfce4-terminal" ]
+then
+    export TERM=xterm-256color
 fi
